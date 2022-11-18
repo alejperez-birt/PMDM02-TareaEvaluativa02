@@ -1,0 +1,7 @@
+{
+  "name": "PMDM02-TareaEvaluativa01",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
