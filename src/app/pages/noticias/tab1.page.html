@@ -1,11 +1,15 @@
-<app-header-tab titulo="Noticias"></app-header-tab>
+<app-header-tab titulo="Mis noticias"></app-header-tab>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" [fullscreen]="true">
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list *ngFor="let articulo of articulos">
+    <ion-item>
+      <ion-checkbox slot="start" color="secondary" (ionChange)="seleccion($event, articulo)" [checked]="marcar(articulo)"></ion-checkbox>
+      <ion-label>
+        <h2>{{ articulo.source.name }}</h2>
+        <p>{{ articulo.title }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
