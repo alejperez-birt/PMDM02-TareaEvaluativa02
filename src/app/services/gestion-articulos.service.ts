@@ -8,41 +8,47 @@ import { Observable } from 'rxjs';
 })
 export class GestionArticulosService {
 
-  private seleccionNoticias: Article [] = [];
+  // Se crea e inicializa el array donde se guardan los artículos seleccionados para leer
+  private seleccionArticulos: Article [] = [];
 
   constructor() {
 
   }
 
-  agregarNoticia(articulo: Article) {
-    let i = this.localizarNoticia(articulo);
+  // Función que añade un artículo al array de seleccion de lectura
+  // Primero se comprueba si éste existe ya en el array mediante la llamada a la función localizarArticulo
+  agregarArticulo(articulo: Article) {
+    let i = this.localizarArticulo(articulo);
     if (i == -1) {
-      this.seleccionNoticias.push(articulo);
+      this.seleccionArticulos.push(articulo);
     }
-
-    console.log(this.seleccionNoticias);
+    console.log(this.seleccionArticulos);
   }
 
-  eliminarNoticia(articulo: Article) {
-    let i = this.localizarNoticia(articulo);
+  // Función que elimina un artículo del array de seleccion de lectura
+  // Primero se comprueba si éste existe ya en el array mediante la llamada a la función localizarArticulo
+  eliminarArticulo(articulo: Article) {
+    let i = this.localizarArticulo(articulo);
     if (i != -1) {
-      this.seleccionNoticias.splice(i, 1);
+      this.seleccionArticulos.splice(i, 1);
     }
-    console.log(this.seleccionNoticias);
+    console.log(this.seleccionArticulos);
   }
 
-  localizarNoticia(articulo: Article) {
-    let encontrado: any = this.seleccionNoticias.find(
+  // Función que comprueba si existe ya un artículo en el array de lectura antes de agrgarlo o eliminarlo
+  localizarArticulo(articulo: Article) {
+    let encontrado: any = this.seleccionArticulos.find(
       function(art) { 
         return art == articulo;
       }
     );
 
-    let i = this.seleccionNoticias.indexOf(encontrado);
+    let i = this.seleccionArticulos.indexOf(encontrado);
     return i;
   }
 
-  getNoticias() {
-    return this.seleccionNoticias;
+  // Función que devuelve el array de los artículos seleccionados para leer
+  getArticulos() {
+    return this.seleccionArticulos;
   }
 }

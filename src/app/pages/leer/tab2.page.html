@@ -2,8 +2,10 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-list *ngFor="let articulo of gestionArticulos.getNoticias()">
+  <!-- Se recorre mediante un For el array donde hemos almacenado los artículos seleccionados para leer -->
+  <ion-list *ngFor="let articulo of gestionArticulos.getArticulos()">
 
+    <!-- Se muestra cada uno de los articulos añadidos al array para leer mediante una ion-card -->
     <ion-card>
         <img alt="{{ articulo.title }}" src="{{ articulo.urlToImage }}" />
         <ion-card-header>
@@ -17,6 +19,8 @@
           <ion-label>
             <a [href]="articulo.url" target="_blank" color="secondary">Leer...</a>
           </ion-label>
+          <!-- Al hacer clic en el icono de la papelera se llama a la función confirmar para
+          hacer saltar la alerta de confirmación. Se envía el articulo como parámetro -->
           <ion-icon slot="end" name="trash-outline" color="secondary" (click)="confirmar(articulo)"></ion-icon>
         </ion-item>
     </ion-card>

@@ -1,3 +1,6 @@
+// Se exportan los dos "interfaces" que vamos a utilizar:
+// el archivo completo y el array de articulos
+
 export interface IArticulo {
   status: string;
   totalResults: number;

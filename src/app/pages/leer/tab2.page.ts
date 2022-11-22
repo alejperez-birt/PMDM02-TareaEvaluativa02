@@ -14,7 +14,7 @@ export class Tab2Page {
 
   constructor(public gestionArticulos: GestionArticulosService, public alertController: AlertController) {}
 
-
+  // Función asíncrona que crea la alerta de confirmación que se muestra al pulsar el icono de la papelera
   async confirmar(articulo: Article) {
     console.log(articulo);
     const alert = await this.alertController.create({
@@ -28,9 +28,10 @@ export class Tab2Page {
         }, {
           text: 'Confirmar',
           handler: () => {
-            console.log('Confirmado');
-            console.log(articulo);
-            this.gestionArticulos.eliminarNoticia(articulo);
+            // Si se confirma la eliminación se llama a la función eliminarArticulo del servicio
+            // Se pasa el articulo como parámetro
+            console.log(articulo);            
+            this.gestionArticulos.eliminarArticulo(articulo);
           }
         }
       ]

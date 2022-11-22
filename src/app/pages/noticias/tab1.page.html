@@ -4,8 +4,11 @@
 
   <ion-list *ngFor="let articulo of articulos">
     <ion-item>
+      <!-- Se muestra el CheckBox y si cambia se llama a la función seleccion enviando el articulo como parámetro -->
+      <!-- El CheckBox aparecerá marcado si el artículo se encuentra en el array de artículos seleccionados para leer -->
       <ion-checkbox slot="start" color="secondary" (ionChange)="seleccion($event, articulo)" [checked]="marcar(articulo)"></ion-checkbox>
       <ion-label>
+        <!-- Se muestra la información que queremos de cada artículo -->
         <h2>{{ articulo.source.name }}</h2>
         <p>{{ articulo.title }}</p>
       </ion-label>
