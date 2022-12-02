@@ -10,29 +10,44 @@ import { Observable } from 'rxjs';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
 export class Tab1Page {
 
   // Se crea e inicializa el array de todos los articulos
   articulos: Article[] = [];
 
-  constructor(private leerFichero: HttpClient, public gestionArticulos: GestionArticulosService) {
-    // Se llama a la función que recoge los articulos del archivo JSON
-    this.getArticulosFichero();
+
+  constructor(private servidorRest: HttpClient, public gestionArticulos: GestionArticulosService) {
+    // Se llama a la función que recoge los articulos del servidor Rest
+    gestionArticulos.recuperarArticulos();
+    this.getArticulosRest("general");
   }
 
-  // Función que recoge todos los articulos del archivo JSON
-  getArticulosFichero() {
+
+  // Función que recoge los articulos del servidor Rest
+  getArticulosRest(categoria: string) {
+    this.articulos = [];
     // Se crea el Observable y nos suscribimos a él
-    let datosFichero: Observable<IArticulo>;
+    let datosServidorRest: Observable<IArticulo>;
 
-    datosFichero = this.leerFichero.get<IArticulo>("/assets/datos/articulos.json");
+    // Se hace la consuta Rest que nos devuelva todos los articulos de la categoria correspondiente
+    var url = "https://newsapi.org/v2/top-headlines?category=" + categoria + "&sortBy=publishedAt&apiKey=ed6be1723ecb4872a86aa1acab7295c3";
+    datosServidorRest = this.servidorRest.get<IArticulo>(url);
 
-    datosFichero.subscribe(datos => {
+    datosServidorRest.subscribe(datos => {
       // Se añaden al array los articulos recogidos
-      console.log(datos.articles);
       this.articulos.push(...datos.articles);
     });
   }
+
+
+  // Función a la que se llama cada vez que se modifica ion-segment
+  segmentChanged(evento: any) {
+    console.log(evento.detail.value);
+    // Se llama a la función que lanza la petición http con el valor del ion-segment-button seleccionado como parámetro
+    this.getArticulosRest(evento.detail.value);
+  }
+
 
   // Función a la que se llama cada vez que se modifica uno de los CheckBox
   seleccion(evento: any, articulo: Article) {
@@ -51,6 +66,7 @@ export class Tab1Page {
       this.gestionArticulos.eliminarArticulo(articulo);
     }
   }
+
 
   // Función que indica si un articulo está marcado o no al mostrar el listado de todos los articulos
   marcar(articulo: Article) {

@@ -2,6 +2,30 @@
 
 <ion-content class="ion-padding" [fullscreen]="true">
 
+  <ion-segment (ionChange)="segmentChanged($event)" value="general" color="secondary" scrollable="true" style="min-width: auto;">
+    <ion-segment-button value="general">
+      <ion-label>General</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="business">
+      <ion-label>Business</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="entertainment">
+      <ion-label>Entertainment</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="health">
+      <ion-label>Health</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="science">
+      <ion-label>Science</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="sports">
+      <ion-label>Sports</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="technology">
+      <ion-label>Technology</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
   <ion-list *ngFor="let articulo of articulos">
     <ion-item>
       <!-- Se muestra el CheckBox y si cambia se llama a la función seleccion enviando el articulo como parámetro -->
